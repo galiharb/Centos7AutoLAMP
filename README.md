@@ -1,11 +1,9 @@
 # galihbarkah.com
 Script-script yang diperlukan sysadmin
 
-######################################################
-Script AutoLAMPCentos7
-######################################################
+# Script centos7AutoLAMP
 
 How to Use :
 1. Download
-2. chmod 755 
-3. ./
+2. chmod 755 centos7AutoLAMP 
+3. ./centos7AutoLAMP
