@@ -1,0 +1,81 @@
+#!/bin/bash
+###########################################################
+#Script Auto Install Apache, PHP 7.2, MariaDB, phpmyadmin
+#Author		:  Galih Amar Barkah
+#Instagram	:  https://www.instagram.com/galih.arb/
+#Version	:  1.0.0
+#Date		:  12 June 2019
+#OS		:  Centos 7
+###########################################################
+
+echo "Auto Install APPM Centos 7"
+echo "###########################"
+
+#Update Centos
+yum -y update
+yum -y install wget
+
+#Tambah EPEL Repo
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
+yum -y install epel-release
+
+#Install MariaDB
+yum -y install mariadb-server mariadb
+systemctl start mariadb.service
+systemctl enable mariadb.service
+
+#Install Apache
+yum -y install httpd
+systemctl start httpd.service
+systemctl enable httpd.service
+
+#Tambah port https dan http di firewall
+firewall-cmd --permanent --zone=public --add-service=http 
+firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --reload
+
+#Install PHP 7.2
+rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum -y install yum-utils
+yum -y update
+
+yum-config-manager --enable remi-php72
+yum -y install php php-opcache
+systemctl restart httpd.service
+
+#MariaDB Support PHP
+yum -y install php-mysqlnd php-pdo
+systemctl restart httpd.service
+
+#Install PHPMYADMIN
+yum -y install phpMyAdmin
+
+#konfigurasi phpmyadmin
+mv /etc/httpd/conf.d/phpMyAdmin.conf /etc/httpd/conf.d/phpMyAdmin.conf.backup
+wget https://galihbarkah.com/script/phpMyAdmin.conf
+cp phpMyAdmin.conf /etc/httpd/conf.d/
+
+mv /etc/phpMyAdmin/config.inc.php /etc/phpMyAdmin/config.inc.php.backup
+wget https://galihbarkah.com/script/config.inc.txt
+mv config.inc.txt config.inc.php
+mv config.inc.php /etc/phpMyAdmin/
+
+echo "Ganti Password Root MariaDB ? | Change MariaDB Root Password ? (y|n)"
+read passmaria
+
+case $passmaria in
+	y | Y)
+	mysql_secure_installation
+	;;
+
+	n | N)
+	;;
+
+	*)
+	echo "Wrong Syntax :p"
+	;;
+esac
+
+systemctl restart httpd.service
+
+echo "######## SELESAI | FINISH #########"
