@@ -7,5 +7,11 @@
 
 ### Cara Menggunakan
 * Login Sebagai root dan masuk ke folder script
-* chmod 755 centos7AutoLAMP 
-* ./centos7AutoLAMP
+* Lakukan Perintah Berikut :
+```
+# chmod 755 centos7AutoLAMP 
+```
+dan
+```
+# ./centos7AutoLAMP 
+```
