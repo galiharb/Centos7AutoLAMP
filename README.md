@@ -1,7 +1,11 @@
 # Script centos7AutoLAMP
-Author : Galih Amar Barkah
+### Isi Paket 
+* Apache
+* MYSQL
+* PHP 7.2
+* PhpMyAdmin
 
-How to Use (run as root):
-1) Download
-2) chmod 755 centos7AutoLAMP 
-3) ./centos7AutoLAMP
+### Cara Menggunakan
+* Login Sebagai root dan masuk ke folder script
+* chmod 755 centos7AutoLAMP 
+* ./centos7AutoLAMP
