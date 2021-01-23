@@ -52,13 +52,8 @@ yum -y install phpMyAdmin
 
 #konfigurasi phpmyadmin
 mv /etc/httpd/conf.d/phpMyAdmin.conf /etc/httpd/conf.d/phpMyAdmin.conf.backup
-wget https://galihbarkah.com/script/phpMyAdmin.conf
+wget https://server.bandaacehkota.net/dw/phpMyAdmin.conf
 cp phpMyAdmin.conf /etc/httpd/conf.d/
-
-mv /etc/phpMyAdmin/config.inc.php /etc/phpMyAdmin/config.inc.php.backup
-wget https://galihbarkah.com/script/config.inc.txt
-mv config.inc.txt config.inc.php
-mv config.inc.php /etc/phpMyAdmin/
 
 echo "Ganti Password Root MariaDB ? | Change MariaDB Root Password ? (y|n)"
 read passmaria
